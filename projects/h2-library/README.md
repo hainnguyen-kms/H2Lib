@@ -84,7 +84,7 @@ We provide 2 directives: ***appHeaderItem*** and  ***appHeaderAvatar*** in case 
 	</h2-library-header>
    
 
- # h2-library-sidebar  
+# h2-library-sidebar  
   
 ### Example:
 

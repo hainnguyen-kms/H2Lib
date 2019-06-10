@@ -1,6 +1,6 @@
 {
   "name": "h2-library",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "author": "hainnguyen",
   "description": "Angular Component Library",
   "peerDependencies": {
