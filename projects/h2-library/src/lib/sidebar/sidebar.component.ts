@@ -1,4 +1,4 @@
-import {Component, ContentChildren, Input, AfterContentInit, QueryList, TemplateRef} from '@angular/core';
+import {Component, Input, AfterContentInit, TemplateRef, ContentChild} from '@angular/core';
 import {SidebarSettings} from '../interface/sidebar.interface';
 import { SidebarMenuItemDirective } from './sidebar-menu-item.directive';
 
@@ -11,13 +11,13 @@ export class SidebarComponent implements AfterContentInit {
   @Input() config: SidebarSettings;
 
   // query if there is any sidebar directive provided
-  @ContentChildren(SidebarMenuItemDirective) contentChildren: QueryList<SidebarMenuItemDirective>;
+  @ContentChild(SidebarMenuItemDirective) contentChildren: SidebarMenuItemDirective;
   sidebarMenuItemTemplate: TemplateRef<any>;
 
   ngAfterContentInit() {
-    // set first sidebarMenu template defined by user to menu
-    if (this.contentChildren.first) {
-      this.sidebarMenuItemTemplate = this.contentChildren.first.templateRef;
+    // set sidebarMenu template defined by user to menu
+    if (this.contentChildren) {
+      this.sidebarMenuItemTemplate = this.contentChildren.templateRef;
     }
   }
 }
