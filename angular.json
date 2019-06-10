@@ -3,11 +3,51 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "H2Lib": {
+    "H2Library": {
+      "root": "projects/h2-library",
+      "sourceRoot": "projects/h2-library/src",
+      "projectType": "library",
+      "prefix": "H2Library",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "projects/h2-library/tsconfig.lib.json",
+            "project": "projects/h2-library/ng-package.json"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/h2-library/src/test.ts",
+            "tsConfig": "projects/h2-library/tsconfig.spec.json",
+            "karmaConfig": "projects/h2-library/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/h2-library/tsconfig.lib.json",
+              "projects/h2-library/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      },
+      "schematics": {
+        "@schematics/angular:component": {
+          "styleext": "scss"
+        }
+      }
+    },
+    "my-app": {
       "root": "",
       "sourceRoot": "src",
       "projectType": "application",
-      "prefix": "mat-ta",
+      "prefix": "app",
       "schematics": {
         "@schematics/angular:component": {
           "style": "scss"
@@ -17,7 +57,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/H2Lib",
+            "outputPath": "dist/my-app",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -27,9 +67,14 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.scss"
+              "src/styles.scss",
+              "node_modules/@fortawesome/fontawesome-free/css/all.css",
+              "node_modules/bootstrap/dist/css/bootstrap.css"
             ],
-            "scripts": [],
+            "scripts": [
+              "node_modules/jquery/dist/jquery.min.js",
+              "node_modules/bootstrap/dist/js/bootstrap.bundle.js"
+            ],
             "es5BrowserSupport": true
           },
           "configurations": {
@@ -62,18 +107,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "H2Lib:build"
+            "browserTarget": "my-app:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "H2Lib:build:production"
+              "browserTarget": "my-app:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "H2Lib:build"
+            "browserTarget": "my-app:build"
           }
         },
         "test": {
@@ -107,7 +152,7 @@
         }
       }
     },
-    "H2Lib-e2e": {
+    "my-app-e2e": {
       "root": "e2e/",
       "projectType": "application",
       "prefix": "",
@@ -116,11 +161,11 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "H2Lib:serve"
+            "devServerTarget": "my-app:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "H2Lib:serve:production"
+              "devServerTarget": "my-app:serve:production"
             }
           }
         },

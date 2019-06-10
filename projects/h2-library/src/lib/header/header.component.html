@@ -1,0 +1,59 @@
+<nav class="navbar navbar-expand navbar-dark bg-dark static-top">
+
+  <a class="navbar-brand mr-1" routerLink="/">
+    <img src="{{settings.logoUrl}}" width="30" height="30" alt="">
+    {{settings.pageTitle}}
+  </a>
+
+  <button class="btn btn-link btn-sm text-white order-1 order-sm-0" (click)="toggleSidebar()">
+    <i class="fas fa-bars"></i>
+  </button>
+
+  <!-- Navbar Search -->
+  <div class="ml-auto">
+
+  </div>
+
+  <!-- Navbar -->
+  <ul class="navbar-nav ml-auto ml-md-0">
+    <ng-container *ngFor="let item of settings.menus">
+      <ng-container *ngTemplateOutlet="headerTemplateRef || defaultHeaderItemTemplate; context: {$implicit: item}">
+      </ng-container>
+    </ng-container>
+    <ng-container *ngTemplateOutlet="avatarDropdownTemplate || defaultAvatarDropdownTemplate; context: {$implicit: settings.user}">
+    </ng-container>
+  </ul>
+
+</nav>
+
+<!--default template-->
+<ng-template #defaultHeaderItemTemplate let-headerItem>
+  <li class="nav-item" *ngIf="headerItem.link">
+    <a class="nav-link" routerLink="{{headerItem.link}}">
+      <span><i class="fas fa-fw {{headerItem.icon}}"></i> {{headerItem.title}}</span></a>
+  </li>
+  <li class="nav-item dropdown" *ngIf="headerItem.subMenus">
+    <a class="nav-link" href="#" id="pagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+
+      <span><i class="fas fa-fw {{headerItem.icon}}"></i> {{headerItem.title}}</span>
+    </a>
+    <div class="dropdown-menu" aria-labelledby="pagesDropdown">
+      <ng-container *ngFor="let subItem of headerItem.subMenus">
+        <a class="dropdown-item" routerLink="{{subItem.link}}"><i class="fas fa-fw {{subItem.icon}}"></i> {{subItem.title}}</a>
+      </ng-container>
+    </div>
+  </li>
+</ng-template>
+
+<!--default avatar dropdown-->
+<ng-template #defaultAvatarDropdownTemplate let-avatarItem>
+  <li class="nav-item dropdown no-arrow mx-1">
+    <a class="nav-link dropdown-toggle" href="#" id="messagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      <img [src]="avatarItem.profileImage" height="30" width="30" alt="My Profile" id="dropdownForm1" class="rounded-circle">
+      Welcome {{avatarItem.userName}}
+    </a>
+    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="messagesDropdown">
+      <span class="dropdown-item" (click)="logout()">Logout</span>
+    </div>
+  </li>
+</ng-template>

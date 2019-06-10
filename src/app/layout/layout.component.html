@@ -1,0 +1,12 @@
+<h2-library-header [settings]="headerSettings" (logoutEvent)="logout()"></h2-library-header>
+
+<div class="wrapper">
+  <h2-library-sidebar [config]="sidebarConfig"></h2-library-sidebar>
+  <div class="content-wrapper">
+      <div class="container-fluid">
+        <ng-content></ng-content>
+      </div>
+      <h2-library-footer title="All Copyright Reserved"></h2-library-footer>
+  </div>
+</div>
+

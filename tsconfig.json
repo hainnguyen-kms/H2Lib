@@ -17,6 +17,14 @@
     "lib": [
       "es2018",
       "dom"
-    ]
+    ],
+    "paths": {
+      "h2-library": [
+        "dist/h2-library"
+      ],
+      "h2-library/*": [
+        "dist/h2-library/*"
+      ]
+    }
   }
 }
